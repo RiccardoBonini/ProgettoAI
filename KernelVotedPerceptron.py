@@ -1,5 +1,7 @@
 import numpy as np
-
+# from numba import vectorize, cuda
+#
+# @vectorize(['int32(int32, int32, int32)'], target = 'cuda')
 def kernel(x, y, d):
     return (1 + np.dot(x, y)) ** d
 
@@ -20,7 +22,7 @@ class KernelVotedPerceptron:
         wy = []
         wx = []
         c = [0]
-        for epoch in range(self.T):  
+        for epoch in range(self.T):
             for i in range(len(x)):
                 s = 0
                 if k == 0:
@@ -60,10 +62,10 @@ class KernelVotedPerceptron:
         return self.k
 
     def predict(self, X):
-        preds = []
+        predictions = []
         for x in X:
             s = 0
-            for w, c in zip(self.V, self.C):
-                s = s + c * np.sign(np.dot(w, x))
-            preds.append(np.sign(1 if s > 0 else -1))
-        return preds
+            for i in range(self.k):
+                s = s + self.C[i] * np.sign(np.dot(self.V[i], x))
+            predictions.append(np.sign(1 if s > 0 else -1))
+        return predictions

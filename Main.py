@@ -7,6 +7,7 @@ from sklearn.metrics import classification_report
 import mnist_reader
 from numpy import linalg as lng
 
+
 #ds = pd.read_csv('https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data')
 
 # train_images = mnist.train_images()
@@ -21,8 +22,12 @@ from numpy import linalg as lng
 # y = mnist.test_labels()
 # y_test = y[0:500]
 
-X_train, y_train = mnist_reader.load_mnist('data/fashion', kind='train')
-X_test, y_test = mnist_reader.load_mnist('data/fashion', kind='t10k')
+X, y = mnist_reader.load_mnist('data/fashion', kind='train')
+X_train = X[0:1000]
+y_train = y[0:1000]
+X, y = mnist_reader.load_mnist('data/fashion', kind='t10k')
+X_test = X[0:200]
+y_test = y[0:200]
 
 
 
@@ -103,23 +108,22 @@ print("Classification report for normalized last method for KERNEL perceptron:  
 #print('Accuracy score for vote method ', accuracy_score(y_test, z))
 
 #KERNEL VOTE METHOD
-#for n in range(len(X_test)):
-    #for i in range(0,10):
-        #score[i] = 0
-        #for j in range(k2[i]):
-            #if j == 0:
-                #score[i] = 0
-            #else:
-                #sign = np.sign(np.dot(weights2[i][j - 1], X_test[n]) + WY2[i][j - 1] * kvp.kernel(WX2[i][j - 1], X_test[n], d= dimension))
-                #score[i] = score[i] + cost2[i][j] * sign
-    #z2[n] = np.argmax(score)
-    #print("valore atteso :", y_test[n], "valore indovinato:", z2[n])
-    #print(z[n])
+for n in range(len(X_test)):
+    for i in range(0,10):
+        score[i] = 0
+        for j in range(k[j]):
+            vx = 0
+            for l in range(j):
+                vx = vx + WY[i][l] * kvp.kernel(WX[i][l], X_test[n])
+            score[i] = score[i] + cost[i][j] * np.sign(np.dot(vx, X_test[n]))
+    z[n] = np.argmax(score)
+    print("valore atteso :", y_test[n], "valore indovinato:", z[n])
+    print(z[n])
 
-#print(z2)
+print(z)
 
-#print('Accuracy score for vote method for KERNEL perceptron', accuracy_score(y_test, z2))
-#print("Classification report for vote method for KERNEL perceptron:  %s:\n%s\n", classification_report(y_test, z2))
+print('Accuracy score for vote method for KERNEL perceptron', accuracy_score(y_test, z))
+print("Classification report for vote method for KERNEL perceptron:  %s:\n%s\n", classification_report(y_test, z))
 
 #AVERAGE (UNNORMALIZED) METHOD
 #for n in range(len(X_test)):
