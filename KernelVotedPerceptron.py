@@ -20,7 +20,7 @@ class KernelVotedPerceptron:
         wy = []
         wx = []
         c = [0]
-        for epoch in range(self.T):  # runs through the data n_iter times
+        for epoch in range(self.T):  
             for i in range(len(x)):
                 s = 0
                 if k == 0:
