@@ -1,7 +1,5 @@
 import numpy as np
-# from numba import vectorize, cuda
-#
-# @vectorize(['int32(int32, int32, int32)'], target = 'cuda')
+
 def kernel(x, y, d):
     return (1 + np.dot(x, y)) ** d
 
@@ -61,11 +59,23 @@ class KernelVotedPerceptron:
     def getK(self):
         return self.k
 
-    def predict(self, X):
+    def voteMethod(self, x):
         predictions = []
-        for x in X:
+        for l in range(len(x)):
             s = 0
             for i in range(self.k):
-                s = s + self.C[i] * np.sign(np.dot(self.V[i], x))
-            predictions.append(np.sign(1 if s > 0 else -1))
+                vx = 0
+                for j in range(i):
+                    vx = vx + self.WY[j] * kernel(self.WX[j], x[l], d = self.d)
+                s = s + self.C[i] * np.sign(vx)
+            predictions.append(np.sign(s))
         return predictions
+
+    # def predict(self, X):
+    #     predictions = []
+    #     for x in X:
+    #         s = 0
+    #         for i in range(self.k):
+    #             s = s + self.C[i] * np.sign(np.dot(self.V[i], x))
+    #         predictions.append(np.sign(1 if s > 0 else -1))
+    #     return predictions
