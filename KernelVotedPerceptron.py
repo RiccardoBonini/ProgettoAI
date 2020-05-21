@@ -71,6 +71,23 @@ class KernelVotedPerceptron:
             predictions.append(np.sign(s))
         return predictions
 
+    def lastMethod(self, x):
+        predictions = []
+        for l in range(len(x)):
+            s = 0
+            for i in range(self.k):
+                s = s + self.WY[i] * kernel(self.WX[i], x[i], d = self.d)
+            predictions.append(np.sign(s))
+        return predictions
+
+    def normalizedLastMethod(self, x):
+        predictions = []
+        for l in range(len(x)):
+            s = 0
+            for i in range(self.k):
+                s = s + self.WY[i] * kernel(self.WX[i], x[i], d = self.d)
+            predictions.append(np.sign(s))
+        return predictions
     # def predict(self, X):
     #     predictions = []
     #     for x in X:

@@ -29,18 +29,21 @@ X2, y2 = mnist_reader.load_mnist('data/fashion', kind='t10k')
 X_test = []
 y_test = []
 
+class1 = 0
+class2 = 1
+
 for i in range(len(y1)):
-    if y1[i] == 0 or y1[i] == 1:
+    if y1[i] == class1 or y1[i] == class2:
         X_train.append(X1[i])
-        if y1[i] == 0:
+        if y1[i] == class1:
             y_train.append(-1)
         else:
             y_train.append(1)
 
 for i in range(len(y2)):
-    if y2[i] == 0 or y2[i] == 1:
+    if y2[i] == class1 or y2[i] == class2:
         X_test.append(X2[i])
-        if y2[i] == 0:
+        if y2[i] == class1:
             y_test.append(-1)
         else:
             y_test.append(1)
@@ -51,16 +54,25 @@ X_test[:] = [ x / 255 for x in X_test]
 print(X_test[0])
 print(y_test)
 
-dimension = 2
+dimension = 4
 
 kernel_voted_perceptron = kvp.KernelVotedPerceptron(T=10, d = dimension)
 
+print("Training the perceptron on classes: ", class1, "and: ", class2, "in dimension = ", dimension)
+
 kernel_voted_perceptron.fit(X_train, y_train)
+
+print("Training completed")
 
 predictions = kernel_voted_perceptron.voteMethod(X_test)
 
 print('Accuracy score for vote method for KERNEL perceptron', accuracy_score(y_test, predictions))
 print("Classification report for vote method for KERNEL perceptron:  %s:\n%s\n", classification_report(y_test, predictions))
+
+# predictions = kernel_voted_perceptron.lastMethod(X_test)
+#
+# print('Accuracy score for last method for KERNEL perceptron', accuracy_score(y_test, predictions))
+# print("Classification report for last method for KERNEL perceptron:  %s:\n%s\n", classification_report(y_test, predictions))
 
 # score = [0,0,0,0,0,0,0,0,0,0]
 #
