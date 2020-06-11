@@ -9,3 +9,7 @@ Il file Main.py contiene l'esecuzione dell'esperimento:
 - Completati i 3 allenamenti + votazioni sulle 3 dimensioni, stampiamo il grafico Test Errors tramite la funzione plot.
 
 Il tempo complessivo di esecuzione è di circa 20 minuti su un processore Intel Core i5-7400 e 8 GB di RAM.
+Per la realizzazione di questo progetto, sono state consultate le seguenti fonti:
+- Freund Y., Schapire R. E., Large Margin Classification Using the Perceptron Algorithm, 1999
+- Manabu Sassano, An Experimental Comparison of the Voted Perceptron and Support Vector Machines in Japanese Analysis Tasks, 2001, per spunti ulteriori sul Kernel Voted Perceptron
+- La libreria sklearn per utilizzare le funzioni accuracy_score e classification_report
