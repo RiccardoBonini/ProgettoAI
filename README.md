@@ -2,6 +2,7 @@
 Elaborato per l'esame di Intelligenza Artificiale
 
 Il file Main.py contiene l'esecuzione dell'esperimento:
+- Si deve scaricare il file data/fashion dal link https://github.com/zalandoresearch/fashion-mnist ed inserirlo nella directory del progetto
 - Vengono importati tutti gli altri file, assieme alle librerie sklearn.metrics (per le funzioni accuracy_score e classification_report), numpy per poter utilizzare i numpy_array, e matplotlib per disegnare il grafico degli errori per ogni epoca con plot.
 - Definiamo la funzione permute per poter "mescolare" il training set.
 - Carichiamo il dataset tramite mnist_reader.load_mnist.
@@ -10,6 +11,7 @@ Il file Main.py contiene l'esecuzione dell'esperimento:
 
 Il tempo complessivo di esecuzione è di circa 15 minuti su un processore Intel Core i5-7400 e 8 GB di RAM.
 Per la realizzazione di questo progetto, sono state consultate le seguenti fonti:
+- Il dataset zalandoresearch, https://github.com/zalandoresearch/fashion-mnist
 - Freund Y., Schapire R. E., Large Margin Classification Using the Perceptron Algorithm, 1999
 - Manabu Sassano, An Experimental Comparison of the Voted Perceptron and Support Vector Machines in Japanese Analysis Tasks, 2001, per spunti ulteriori sul Kernel Voted Perceptron
 - La libreria sklearn per utilizzare le funzioni accuracy_score e classification_report
