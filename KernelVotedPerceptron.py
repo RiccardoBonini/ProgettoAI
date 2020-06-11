@@ -6,20 +6,20 @@ def kernel(x, y, d):
 class KernelVotedPerceptron:
     def __init__(self, T, d):
         self.T = T
-        self.V = []
         self.C = []
         self.k = 0
         self.WY = []
         self.WX = []
         self.d = d
+        self.errors = []
 
     def fit(self, x, y):
 
         k = 0
-        v = [np.zeros_like(x[0])]
         wy = []
         wx = []
         c = [0]
+        er = []
         for epoch in range(self.T):
             for i in range(len(x)):
                 s = 0
@@ -32,34 +32,19 @@ class KernelVotedPerceptron:
                 if pred == y[i]:
                     c[k] += 1
                 else:
-                    v.append(np.add(v[k], np.dot(y[i], x[i])))
                     wy.append(y[i])
                     wx.append(x[i])
                     c.append(1)
                     k += 1
-
-        self.V = v
+                if i % (len(x)/20) == 0: er.append(k)
+                
         self.C = c
         self.k = k
         self.WY = wy
         self.WX = wx
+        self.errors = er
 
-    def getV(self):
-        return self.V
-
-    def getC(self):
-        return self.C
-
-    def getWY(self):
-        return self.WY
-
-    def getWX(self):
-        return self.WX
-
-    def getK(self):
-        return self.k
-
-    def voteMethod(self, x):
+    def vote(self, x):
         predictions = []
         for l in range(len(x)):
             s = 0
@@ -71,28 +56,4 @@ class KernelVotedPerceptron:
             predictions.append(np.sign(s))
         return predictions
 
-    def lastMethod(self, x):
-        predictions = []
-        for l in range(len(x)):
-            s = 0
-            for i in range(self.k):
-                s = s + self.WY[i] * kernel(self.WX[i], x[i], d = self.d)
-            predictions.append(np.sign(s))
-        return predictions
 
-    def normalizedLastMethod(self, x):
-        predictions = []
-        for l in range(len(x)):
-            s = 0
-            for i in range(self.k):
-                s = s + self.WY[i] * kernel(self.WX[i], x[i], d = self.d)
-            predictions.append(np.sign(s))
-        return predictions
-    # def predict(self, X):
-    #     predictions = []
-    #     for x in X:
-    #         s = 0
-    #         for i in range(self.k):
-    #             s = s + self.C[i] * np.sign(np.dot(self.V[i], x))
-    #         predictions.append(np.sign(1 if s > 0 else -1))
-    #     return predictions
