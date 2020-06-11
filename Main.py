@@ -47,8 +47,8 @@ for run in range(2):
         class1 = 0
         class2 = 5
     if run == 1:
-        class1 = 0
-        class2 = 7
+        class1 = 1
+        class2 = 9
 
     #we select the elements of the 2 chosen classes from the original dataset
     for i in range(len(y1)):
@@ -73,7 +73,7 @@ for run in range(2):
 
     X_train, y_train = permute(preX, prey)
 
-    #creating 2 vectors to plot for the Test Errors Graph
+    #creating 2 vector to plot for the Test Errors Graph
     plot_epochs = []
     for i in range(200):
         plot_epochs.append(i * 1 / 25)
