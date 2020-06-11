@@ -73,7 +73,7 @@ for run in range(2):
 
     X_train, y_train = permute(preX, prey)
 
-    #creating 2 vector to plot for the Test Errors Graph
+    #creating 2 vectors to plot for the Test Errors Graph
     plot_epochs = []
     for i in range(200):
         plot_epochs.append(i * 1 / 25)
