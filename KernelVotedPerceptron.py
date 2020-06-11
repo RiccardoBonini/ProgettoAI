@@ -7,7 +7,7 @@ class KernelVotedPerceptron:
     def __init__(self, T, d):
         self.T = T
         self.C = []
-        self.k = 0
+        self.K = 0
         self.WY = []
         self.WX = []
         self.d = d
@@ -39,7 +39,7 @@ class KernelVotedPerceptron:
                 if i % (len(x)/20) == 0: er.append(k)
 
         self.C = c
-        self.k = k
+        self.K = k
         self.WY = wy
         self.WX = wx
         self.errors = er
@@ -48,7 +48,7 @@ class KernelVotedPerceptron:
         predictions = []
         for l in range(len(x)):
             s = 0
-            for i in range(self.k):
+            for i in range(self.K):
                 vx = 0
                 for j in range(i):
                     vx = vx + self.WY[j] * kernel(self.WX[j], x[l], d = self.d)
