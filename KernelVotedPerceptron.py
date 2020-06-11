@@ -13,7 +13,7 @@ class KernelVotedPerceptron:
         self.d = d
         self.errors = []
 
-    def fit(self, x, y):
+    def train(self, x, y):
 
         k = 0
         wy = []
@@ -37,7 +37,7 @@ class KernelVotedPerceptron:
                     c.append(1)
                     k += 1
                 if i % (len(x)/20) == 0: er.append(k)
-                
+
         self.C = c
         self.k = k
         self.WY = wy

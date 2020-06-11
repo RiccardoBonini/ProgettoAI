@@ -1,8 +1,8 @@
-import numpy as np
+import mnist_reader
 import KernelVotedPerceptron as kvp
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import classification_report
-import mnist_reader
+import numpy as np
 import matplotlib.pyplot as plt
 
 #function to permute the training set
@@ -86,7 +86,7 @@ for run in range(2):
 
         print('Training the voted perceptron on classes: ', class1, 'and: ', class2, 'in dimension = ', dimension)
 
-        kernel_voted_perceptron.fit(X_train, y_train)
+        kernel_voted_perceptron.train(X_train, y_train)
 
         print('Training completed')
         errors.append(kernel_voted_perceptron.errors)
