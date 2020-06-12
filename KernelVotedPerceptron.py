@@ -46,14 +46,22 @@ class KernelVotedPerceptron:
 
     def vote(self, x):
         predictions = []
+        x0 = np.zeros(len(x[0]))
         for l in range(len(x)):
+
+            #for each x, we store the product vx as an array so we don't have to calculate it every cycle
+            vx = []
+            vx.append(0 + 1*kernel(x0, x[l], d= self.d)) #this is the first element, we treat the first mistaken x as a vector of all zeros
+            for j in range(1, self.K):
+                vx.append(vx[j - 1] + self.WY[j] * kernel(self.WX[j], x[l], d = self.d))
+
             s = 0
             for i in range(self.K):
-                vx = 0
-                for j in range(i):
-                    vx = vx + self.WY[j] * kernel(self.WX[j], x[l], d = self.d)
-                s = s + self.C[i] * np.sign(vx)
+
+                s = s + self.C[i] * np.sign(vx[i])
+
             predictions.append(np.sign(s))
         return predictions
+
 
 
